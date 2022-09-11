@@ -203,47 +203,66 @@ const users = [
 
 // функция принимает массив и выводит в консоль все имена пользователей
 function getAllNames(array) {
-
+  return array.forEach((item) => console.log(item.name))
+  
 }
 
 getAllNames(users);
 
 // функция принимает массив и id пользователя, и выводит в консоль всю информацию (весь объект) об этом пользователе
 function getUserById(array, id) {
-
+  return array.forEach((item) => {
+    if(item.id === id){
+      console.log(item)
+    }
+  }
+  )
 }
 
 getUserById(users, 2); // должен вывести в консоль объект юзера с id === 2
 
-// функция принимает массив и возвращает новый массив в котором у всех пользователей пропадет поле address
+//функция принимает массив и возвращает новый массив в котором у всех пользователей пропадет поле address
 function removeAddresses(array) {
-
+  return array.map((item) => {
+    delete item.address
+    return item
+  })
 }
 
 console.log(removeAddresses(users));
 
 
-// функция принимает массив и id пользователя, который должен быть удален и возвращает новый массив, уже без этого пользователя.
+//функция принимает массив и id пользователя, который должен быть удален и возвращает новый массив, уже без этого пользователя.
 function deleteUser(array, id) {
-
+  return array.filter((user) => user.id !== id)
 }
 
-console.log(deleteUser(users, 1)); // массив без юзера с id === 1
+console.log(deleteUser(users, 3)); // массив без юзера с id === 1
 
-// функция принимает массив и id пользователя и выводит в консоль его ключ geo
+//функция принимает массив и id пользователя и выводит в консоль его ключ geo
 function getUsersGeo(array, id) {
-
+  array.forEach(user => {
+    if(user.id === id){
+        console.log(user.address.geo)
+    }
+})
 }
-
-
-// функция принимает массив и id пользователя, и выводит в консоль всю информацию (весь объект) о компании этого пользователя
+getUsersGeo(users, 3)
+//функция принимает массив и id пользователя, и выводит в консоль всю информацию (весь объект) о компании этого пользователя
 function getUsersCompany(array, id) {
+  array.forEach(user => {
+    if(user.id === id){
+        console.log(user.company)
+    }
+})
 
 }
+getUsersCompany(users, 1)
 
 // функция принимает массив, id пользователя и новый номер телефона.
 // Функция возвращает новый массив с измененным номером для указанного пользователя. 
 
 function changePhone(array, id, phone) {
-  
+  return array.map((item) => item.id === id ? {...item, phone: phone} : item)
 }
+console.log(changePhone(users, 1, '123'))
